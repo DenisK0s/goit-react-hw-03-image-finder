@@ -7,11 +7,16 @@ import ImageGalleryItem from '../ImageGalleryItem';
 //стили
 import styles from './ImageGallery.module.css';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, modalHandler }) => {
   return (
-    <ul className={styles.ImageGallery}>
-      {images.map(({ id, webformatURL, tags }) => (
-        <ImageGalleryItem key={id} smallImage={webformatURL} imageName={tags} />
+    <ul className={styles.ImageGallery} onClick={modalHandler}>
+      {images.map(({ id, webformatURL, largeImageURL, tags }) => (
+        <ImageGalleryItem
+          key={id}
+          smallImageUrl={webformatURL}
+          largeImageUrl={largeImageURL}
+          imageName={tags}
+        />
       ))}
     </ul>
   );
@@ -19,6 +24,7 @@ const ImageGallery = ({ images }) => {
 
 ImageGallery.propTypes = {
   images: PropTypes.array,
+  modalHandler: PropTypes.func
 };
 
 export default ImageGallery;

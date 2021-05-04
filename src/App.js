@@ -6,7 +6,7 @@ import { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import ImageGallery from './components/ImageGallery';
 import Button from './components/Button';
-// import Modal from './components/Modal';
+import Modal from './components/Modal';
 import Loader from './components/Loader';
 
 //Сервисы
@@ -29,6 +29,24 @@ class App extends Component {
       this.fetchImages();
     }
   }
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modalOpen: !prevState.modalOpen,
+    }));
+  };
+
+  galleryClickHandler = event => {
+    if (event.target === event.currentTarget) return;
+
+    const url = event.target.dataset.url;
+
+    this.setState({
+      largeImageUrl: url,
+    });
+
+    this.toggleModal();
+  };
 
   submitFormHandler = value => {
     this.setState({ searchQuery: value, currentPage: 1, images: [] });
@@ -56,17 +74,21 @@ class App extends Component {
   };
 
   render() {
-    const { images, isLoading } = this.state;
+    const { images, isLoading, modalOpen, largeImageUrl } = this.state;
     const isLoadMoreButtonVisible = images.length > 0 && !isLoading;
     return (
       <>
         <SearchBar onSubmit={this.submitFormHandler} />
-        <ImageGallery images={images} />
+        <ImageGallery images={images} modalHandler={this.galleryClickHandler} />
         {isLoading && <Loader type="Bars" />}
         {isLoadMoreButtonVisible && (
           <Button clickHandler={this.fetchImages}>Load More</Button>
         )}
-        {/* <Modal /> */}
+        {modalOpen && (
+          <Modal closeModal={this.toggleModal}>
+            <img src={largeImageUrl} alt="#" />
+          </Modal>
+        )}
       </>
     );
   }

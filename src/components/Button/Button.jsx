@@ -14,6 +14,7 @@ const Button = ({ clickHandler, children }) => {
 
 Button.propTypes = {
   clickHandler: PropTypes.func,
+  children: PropTypes.node,
 };
 
 export default Button;

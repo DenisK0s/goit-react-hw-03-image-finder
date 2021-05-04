@@ -1,9 +1,6 @@
 //модули
-// import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types';
 import { Component } from 'react';
-
-//компоненты
 
 //стили
 import styles from './SearchBar.module.css';
@@ -11,6 +8,10 @@ import styles from './SearchBar.module.css';
 class SearchBar extends Component {
   state = {
     inputValue: '',
+  };
+
+  static propTypes = {
+    onSubmit: PropTypes.func,
   };
 
   inputHandler = event => {

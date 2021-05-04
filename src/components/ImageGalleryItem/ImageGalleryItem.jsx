@@ -6,20 +6,22 @@ import PropTypes from 'prop-types';
 //стили
 import styles from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ smallImage, imageName }) => {
+const ImageGalleryItem = ({ smallImageUrl, largeImageUrl, imageName }) => {
   return (
     <li className={styles.ImageGalleryItem}>
       <img
-        src={smallImage}
+        src={smallImageUrl}
         alt={imageName}
         className={styles.ImageGalleryItemImage}
+        data-url={largeImageUrl}
       />
     </li>
   );
 };
 
 ImageGalleryItem.propTypes = {
-  smallImage: PropTypes.string,
+  smallImageUrl: PropTypes.string,
+  largeImageUrl: PropTypes.string,
   imageName: PropTypes.string,
 };
 
