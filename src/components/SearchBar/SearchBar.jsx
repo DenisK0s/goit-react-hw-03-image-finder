@@ -2,6 +2,9 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 
+//компоненти
+
+
 //стили
 import styles from './SearchBar.module.css';
 
@@ -37,7 +40,7 @@ class SearchBar extends Component {
   render() {
     const { inputValue } = this.state;
     return (
-      <header className={styles.SearchBar}>
+      <header className={styles.Searchbar}>
         <form className={styles.SearchForm} onSubmit={this.submitForm}>
           <button type="submit" className={styles.SearchFormButton}>
             <span className={styles.SearchFormButtonLabel}>Search</span>

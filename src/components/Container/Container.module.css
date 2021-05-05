@@ -1,0 +1,12 @@
+.Container {
+  width: 1200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  margin: 0 auto;
+  text-align: center;
+}
+
+.HeaderContainer {
+  background-color: aqua;
+}

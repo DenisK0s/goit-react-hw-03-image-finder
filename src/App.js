@@ -8,6 +8,7 @@ import ImageGallery from './components/ImageGallery';
 import Button from './components/Button';
 import Modal from './components/Modal';
 import Loader from './components/Loader';
+import Container from './components/Container';
 
 //Сервисы
 import { fetchData } from './services/api-service';
@@ -41,11 +42,12 @@ class App extends Component {
 
     const url = event.target.dataset.url;
 
-    this.setState({
-      largeImageUrl: url,
-    });
-
-    this.toggleModal();
+    this.setState(
+      {
+        largeImageUrl: url,
+      },
+      this.toggleModal,
+    );
   };
 
   submitFormHandler = value => {
@@ -80,9 +82,15 @@ class App extends Component {
       <>
         <SearchBar onSubmit={this.submitFormHandler} />
         <ImageGallery images={images} modalHandler={this.galleryClickHandler} />
-        {isLoading && <Loader type="Bars" />}
+        {isLoading && (
+          <Container>
+            <Loader type="ThreeDots" />
+          </Container>
+        )}
         {isLoadMoreButtonVisible && (
-          <Button clickHandler={this.fetchImages}>Load More</Button>
+          <Container>
+            <Button clickHandler={this.fetchImages}>Load More</Button>
+          </Container>
         )}
         {modalOpen && (
           <Modal closeModal={this.toggleModal}>
