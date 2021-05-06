@@ -1,14 +1,26 @@
 import axios from 'axios';
 
-import apiOptions from '../settings/apiOptions';
-
 // axios.defaults.headers.common['Authorization'] =
 //   'Bearer 20625460-dce04eecf80fa07713c408cae';
 
-export const fetchData = ({ searchQuery, currentPage }) => {
-  const { BASE_URL, API_KEY, IMAGES_PER_PAGE } = apiOptions;
+const BASE_URL = 'https://pixabay.com/api/';
+const API_KEY = '20625460-dce04eecf80fa07713c408cae';
 
-  const queryString = `${BASE_URL}?key=${API_KEY}&q=${searchQuery}&per_page=${IMAGES_PER_PAGE}&page=${currentPage}`;
+axios.defaults.baseURL = BASE_URL;
+axios.defaults.params = {
+  key: API_KEY,
+  image_type: 'photo',
+  orientation: 'horizontal',
+  per_page: 12,
+};
 
-  return axios.get(queryString).then(({ data }) => data);
+export const fetchData = ({ searchQuery: q, currentPage: page }) => {
+  return axios
+    .get('', {
+      params: { q, page },
+    })
+    .then(({ data }) => {
+      console.log(data);
+      return data;
+    });
 };
